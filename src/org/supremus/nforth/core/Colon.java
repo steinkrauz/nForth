@@ -5,17 +5,18 @@ import java.util.Map;
 import java.util.Stack;
 
 import org.supremus.nforth.INWord;
+import org.supremus.nforth.NMachine;
 
-public class Mul implements INWord{
+public class Colon implements INWord{
 
     @Override
     public boolean isNative() {
         return true;
     }
 
-     @Override
+    @Override
     public boolean isImmediate() {
-        return false;
+        return true;
     }
 
 
@@ -26,10 +27,8 @@ public class Mul implements INWord{
 
     @Override
     public void execute(Stack<Object> theStack, Object[] theMemory, Map<String, Integer> vars, Map<String, INWord> theDict ) {
-        Integer int1 = (Integer) theStack.pop();
-        Integer int2 = (Integer) theStack.pop();
-        
-        theStack.push(int1*int2);
+        theMemory[0] = NMachine.MODE_COMPILE;
+        theMemory[1] = theStack.size();        
     }
 
 }

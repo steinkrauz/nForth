@@ -11,5 +11,5 @@ public interface INWord {
 
     List<Object> getText();
 
-    void execute(Stack<Object> theStack, Object[] theMemory, Map<String, Integer> vars);
+    void execute(Stack<Object> theStack, Object[] theMemory, Map<String, Integer> vars, Map<String, INWord> theDict );
 }

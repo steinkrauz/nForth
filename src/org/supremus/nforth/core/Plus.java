@@ -25,7 +25,7 @@ public class Plus implements INWord{
     }
 
     @Override
-    public void execute(Stack<Object> theStack, Object[] theMemory, Map<String, Integer> vars) {
+    public void execute(Stack<Object> theStack, Object[] theMemory, Map<String, Integer> vars, Map<String, INWord> theDict ) {
         Integer int1 = (Integer) theStack.pop();
         Integer int2 = (Integer) theStack.pop();
         

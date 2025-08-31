@@ -19,7 +19,7 @@ public class Div implements INWord{
     }
 
     @Override
-    public void execute(Stack<Object> theStack, Object[] theMemory, Map<String, Integer> vars) {
+    public void execute(Stack<Object> theStack, Object[] theMemory, Map<String, Integer> vars, Map<String, INWord> theDict ) {
         Integer divisor = (Integer) theStack.pop();
         Integer dividend = (Integer) theStack.pop();
         Object res;

@@ -1,21 +1,21 @@
 package org.supremus.nforth;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.supremus.nforth.core.*;
 
 public class NForth {
-    private Map<String, INWord> theDict = new HashMap<String, INWord>();
+    
     private NMachine vm = new NMachine();
 
     public NForth() {
-        theDict.put("+", new Plus());
-        theDict.put("-", new Sub());
-        theDict.put("*", new Mul());
-        theDict.put("/", new Div());
+        vm.addWord("+", new Plus());
+        vm.addWord("-", new Sub());
+        vm.addWord("*", new Mul());
+        vm.addWord("/", new Div());
+        vm.addWord(":", new Colon());
+        vm.addWord(";", new Semicolon());
     }
 
     private List<Object> parse(String str) {
@@ -64,8 +64,9 @@ public class NForth {
     }
 
     private Object tokenToObject(String token) {
-        if (theDict.containsKey(token)) {
-            return theDict.get(token);
+        Object res = vm.getWord(token);
+        if (null != res) {
+            return res;
         }
         try {
             return Integer.valueOf(token);
@@ -76,7 +77,7 @@ public class NForth {
     }
 
     public void addWord(String name, INWord impl) {
-        theDict.put(name, impl);
+        vm.addWord(name, impl);
     }
 
     public void run(String source) {
@@ -87,4 +88,8 @@ public class NForth {
     public Object retVal() {
         return vm.peek();
     }
+
+	public void dump() {
+		vm.dumpStack("");
+	}
 }
